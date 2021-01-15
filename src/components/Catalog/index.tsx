@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import BeatLoader from 'react-spinners/BeatLoader'
 
@@ -14,8 +14,13 @@ const Catalog: React.FC = () => {
 
     const products = useSelector<IState, IProduct[]>((state) => state.products.data)
     const isLoading = useSelector<IState, boolean>((state) => state.products.loading)
+    const isError = useSelector<IState, boolean>((state) => state.products.error)
 
     useEffect(() => {
+        dispatch(loadProductsRequest())
+    }, [dispatch])
+
+    const handleRefreshLoadProducts = useCallback(() => {
         dispatch(loadProductsRequest())
     }, [dispatch])
 
@@ -26,6 +31,11 @@ const Catalog: React.FC = () => {
             {products.map((product) => (
                 <CatalogItem key={product.id} product={product} />
             ))}
+            {isError && 
+            <div style={{color:'red'}}>
+                <div>Erro ao carregar produtos</div>
+                <button onClick={handleRefreshLoadProducts}>Tentar Novamente</button>
+            </div>}
         </main>
     )
 }

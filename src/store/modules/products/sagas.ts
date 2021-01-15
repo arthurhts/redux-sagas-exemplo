@@ -6,10 +6,11 @@ import { IProduct, ProductsTypes } from './types'
 
 export function* load() {
     try {
-        const response: AxiosResponse<IProduct[]> = yield call(api.get, '/products')
 
         yield delay(3000)
+        const response: AxiosResponse<IProduct[]> = yield call(api.get, '/products')
         yield put(loadProductsSuccess(response.data))
+        
     } catch (error) {
         yield put(loadProductsFailure())
     }
