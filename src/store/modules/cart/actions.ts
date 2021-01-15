@@ -1,29 +1,9 @@
+import { action } from 'typesafe-actions'
 import { IProduct } from '../products/types'
 import { CartTypes } from './types'
 
-export function addProductToCartRequest(product: IProduct) {
-    return {
-        type: CartTypes.ADD_PRODUCT_TO_CART_REQUEST,
-        payload: {
-            product
-        }
-    }
-}
+export const addProductToCartRequest = (product: IProduct) => action(CartTypes.ADD_PRODUCT_TO_CART_REQUEST, {product})
 
-export function addProductToCartSuccess(product: IProduct) {
-    return {
-        type: CartTypes.ADD_PRODUCT_TO_CART_SUCCESS,
-        payload: {
-            product
-        }
-    }
-}
+export const addProductToCartSuccess = (product: IProduct) => action(CartTypes.ADD_PRODUCT_TO_CART_SUCCESS, {product})
 
-export function addProductToCartFailure(productId: number) {
-    return {
-        type: CartTypes.ADD_PRODUCT_TO_CART_FAILURE,
-        payload: {
-            productId
-        }
-    }
-}
+export const addProductToCartFailure = (productId: number) => action(CartTypes.ADD_PRODUCT_TO_CART_FAILURE, {productId})

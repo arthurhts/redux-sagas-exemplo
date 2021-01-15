@@ -15,6 +15,8 @@ export interface ICartItem {
 
 //STATE TYPES
 export interface ICartState {
-    readonly items: ICartItem[]
+    readonly data: ICartItem[]
+    readonly loading: boolean
+    readonly error: boolean
     readonly failedStockCheck: number[]
 }

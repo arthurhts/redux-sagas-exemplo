@@ -8,7 +8,7 @@ const INITIAL_STATE: IProductsState = {
     error: false
 }
 
-const cart: Reducer<IProductsState> = (state = INITIAL_STATE, action) => {
+const reducer: Reducer<IProductsState> = (state = INITIAL_STATE, action) => {
     return produce(state, (draft) => {
         switch (action.type) {
             case ProductsTypes.LOAD_REQUEST: {
@@ -20,7 +20,7 @@ const cart: Reducer<IProductsState> = (state = INITIAL_STATE, action) => {
             case ProductsTypes.LOAD_SUCCESS: {
                 draft.loading = false
                 draft.error = false
-                draft.data = action.payload
+                draft.data = action.payload.product
                 break
             }
             case ProductsTypes.LOAD_FAILURE: {
@@ -36,4 +36,4 @@ const cart: Reducer<IProductsState> = (state = INITIAL_STATE, action) => {
     })
 }
 
-export default cart
+export default reducer

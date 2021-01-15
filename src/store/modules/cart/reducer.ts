@@ -3,22 +3,24 @@ import produce from 'immer'
 import { CartTypes, ICartState } from './types'
 
 const INITIAL_STATE: ICartState = {
-    items: [],
-    failedStockCheck: []
+    data: [],
+    failedStockCheck: [],
+    loading:false,
+    error:false,
 }
 
-const cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
+const reducer: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
     return produce(state, (draft) => {
         switch (action.type) {
             case CartTypes.ADD_PRODUCT_TO_CART_SUCCESS: {
                 const { product } = action.payload
 
-                const productInCartIndex = draft.items.findIndex((item) => item.product.id === product.id)
+                const productInCartIndex = draft.data.findIndex((item) => item.product.id === product.id)
 
                 if (productInCartIndex >= 0) {
-                    draft.items[productInCartIndex].quantity++
+                    draft.data[productInCartIndex].quantity++
                 } else {
-                    draft.items.push({ product, quantity: 1 })
+                    draft.data.push({ product, quantity: 1 })
                 }
 
                 break
@@ -34,4 +36,4 @@ const cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
     })
 }
 
-export default cart
+export default reducer

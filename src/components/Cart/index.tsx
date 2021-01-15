@@ -6,7 +6,7 @@ import { ICartItem } from '../../store/modules/cart/types'
 // import { Container } from './styles';
 
 const Cart: React.FC = () => {
-    const cart = useSelector<IState, ICartItem[]>((state) => state.cart.items)
+    const cart = useSelector<IState, ICartItem[]>((state) => state.cart.data)
 
     return (
         <div>
